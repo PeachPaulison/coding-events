@@ -4,22 +4,18 @@
 <body class="container">
 
 <nav th:replace="fragments :: navigation"></nav>
-//No need to put an action on here because it's going to post where it lives.
+
 <form method="post">
 
         <th:block th:each="event : ${events}">
             <div class="form-group">
             <label>
                 <span th:text="${event.name}"></span>
-                <input type="checkbox" name="eventIds" th:value="event.id" class="form-control">
+                <input type="checkbox" name="eventIds" th:value="${event.id}" class="form-control">
             </label>
             </div>
         </th:block>
-
-
-    <input type= "submit" value="Delete" class="btn btn-danger">
+             <input type= "submit" value="Delete" class="btn btn-danger">
 </form>
-
-
 </body>
 </html>
