@@ -3,10 +3,13 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.EventType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,14 +43,22 @@ public class EventController {
 
     //this lives at /events/create
     @GetMapping("create")
-    public String renderCreateEventForm() {
+    public String renderCreateEventForm(Model model) {
+        model.addAttribute("title", "Create Event");
+        model.addAttribute(new Event());
         return "events/create";
     }
     //this also lives at /events/create, which is ok because both handlers handle
     //different kinds of requests.
 
     @PostMapping("create")
-    public String processCreateEventForm(@ModelAttribute Event newEvent) {
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent,
+                                         Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Create Event");
+            return "events/create";
+
+        }
         EventData.add(newEvent);
         return "redirect:";
     }
@@ -56,6 +67,7 @@ public class EventController {
     public String displayDeleteEventForm(Model model) {
         model.addAttribute("title", "Delete Events");
         model.addAttribute("events", EventData.getAll());
+        model.addAttribute(EventType.values());
         return "events/delete";
     }
 
