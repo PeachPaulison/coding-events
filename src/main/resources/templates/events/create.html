@@ -12,19 +12,19 @@
                 <label>Name
                     <input th:field="${event.name}" class="form-control" >
                 </label>
-                <p class=""errors="${event.name"></p>
+                <p class="errors" th:errors="${event.name}"></p>
             </div>
             <div class="form-group">
             <label>Description
                 <input th:field="${event.description}" class="form-control" >
             </label>
-                <p class=""errors="${event.description"></p>
+                <p class="errors" th:errors="${event.description}"></p>
         </div>
             <div class="form-group">
                 <label>Contact Email
                     <input th:field="${event.contactEmail}" class="form-control" >
                 </label>
-                <p class=""errors="${event.contactEmail"></p>
+                <p class="errors" th:errors="${event.contactEmail}"></p>
             </div>
             <div class="form-group">
 <!--                <label>Type-->
@@ -41,6 +41,6 @@
                 <input type="submit" value="Create Event" class="btn btn-success">
             </div>
         </form>
-
+<!--<p th:text="${errors}"></p>-->
 </body>
 </html>

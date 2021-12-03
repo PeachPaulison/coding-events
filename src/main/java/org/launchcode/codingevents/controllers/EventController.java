@@ -41,15 +41,12 @@ public class EventController {
         return "events/index";
     }
 
-    //this lives at /events/create
     @GetMapping("create")
     public String renderCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
         model.addAttribute(new Event());
         return "events/create";
     }
-    //this also lives at /events/create, which is ok because both handlers handle
-    //different kinds of requests.
 
     @PostMapping("create")
     public String processCreateEventForm(@ModelAttribute @Valid Event newEvent,
@@ -57,7 +54,6 @@ public class EventController {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
             return "events/create";
-
         }
         EventData.add(newEvent);
         return "redirect:";
@@ -79,6 +75,5 @@ public class EventController {
             }
         }
             return "redirect:";
-
     }
 }
